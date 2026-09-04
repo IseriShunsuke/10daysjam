@@ -27,20 +27,15 @@ public:
 	/// </summary>
 	void Draw();
 
+	bool GetFinish() { return isFinish; }
 private:
 	
 	uint32_t textureHandle_;
-	uint32_t textureHandleNext_;
-
-	uint32_t fontTextureHandle_;
 
 	Sprite* sprite_ = nullptr;
-	Sprite* spriteNext_ = nullptr;
-	Sprite* spriteFont_ = nullptr;
-
-	 KamataEngine::Vector2 position;
-	 KamataEngine::Vector2 nextPosition;
 
 	 // カメラ
 	 Camera camera_;
+
+	 bool isFinish;
 };

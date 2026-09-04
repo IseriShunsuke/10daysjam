@@ -3,7 +3,7 @@
 #include "KamataEngine.h"
 #include "Effect.h"
 #include "Player.h"
-#include "GraphBar.h"
+#include "Result.h"
 #include "Stage.h"
 #include "DrawNumber.h"
 
@@ -31,14 +31,15 @@ public:
 	/// </summary>
 	void Draw();
 
+
+	bool GetRetry() { return isRetry; }
+	bool GetTitle() { return isTitle; }
 private:
 	KamataEngine::Model* model_ = nullptr;
 	Player* player_;
-	GraphBar* graphBar;
 	Stage* stage_;
 	DrawNumber* drawNumber_;
 
-	uint32_t graphBarHandle_;
 	uint32_t backGraundTextureHandle_;
 	uint32_t fontTextureHandle_;
 	uint32_t textureHandleNumber_;
@@ -50,5 +51,11 @@ private:
 
 	// カメラ
 	Camera camera_;
+
+	bool isRetry;
+	bool isTitle;
+	bool isDead;
+
+	Result* result_;
 };
 

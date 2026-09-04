@@ -8,7 +8,6 @@ using namespace KamataEngine;
 GameScene::~GameScene()
 {
 	delete player_;
-	delete graphBar;
 	delete stage_;
 	delete drawNumber_;
 
@@ -22,7 +21,6 @@ void GameScene::Initialize()
 	camera_.Initialize();
 
 	backGraundTextureHandle_ = TextureManager::Load("stage.png");
-	graphBarHandle_ = TextureManager::Load("white1x1.png");
 	textureHandleNumber_ = TextureManager::Load("number.png");
 
 	model_ = Model::CreateFromOBJ("player");
@@ -33,30 +31,46 @@ void GameScene::Initialize()
 	stage_ = new Stage();
 	stage_->Initialize(backGraundTextureHandle_);
 
-	graphBar = new GraphBar();
-	graphBar->Initialize(graphBarHandle_);
-	hp_ = 0;
+	hp_ = 200;
 
 	drawNumber_ = new DrawNumber();
 	drawNumber_->Initialize(textureHandleNumber_);
 	gameScore_ = 0;
+
+	isRetry = false;
+	isTitle = false;
+	isDead = false;
+
+	result_ = new Result();
+	result_->Initialize();
 }
 
 // 更新
 void GameScene::Update()
 {
 
-	hp_--;
-	if (hp_ < 0) {
-		hp_ = 200;
+	if (!isDead)//生きてたら
+	{
+		hp_--;
+
+		if (hp_ <= 0)
+		{
+			isDead = true;//死
+		}
+
+		gameScore_++;//スコア
+
+		player_->Update();				//
+		stage_->Update();				//再利用
+		drawNumber_->Update(gameScore_);//
 	}
+	else
+	{
+		result_->Update();
 
-	gameScore_++;
-
-	player_->Update();
-	stage_->Update();
-	graphBar->Update(hp_);
-	drawNumber_->Update(gameScore_);
+		isRetry = result_->GetRetry();
+		isTitle = result_->GetTitle();
+	}
 }
 
 // 描画
@@ -78,9 +92,12 @@ void GameScene::Draw()
 
 	Sprite::PreDraw(dxcommon->GetCommandList());
 
-	graphBar->Draw();
 	drawNumber_->Draw();
 
+	if (isDead)//死んだら表示
+	{
+		result_->Draw();
+	}
 
 	Sprite::PostDraw();
 }
