@@ -16,7 +16,7 @@ public:
 	// 描画
 	void Draw();
 
-
+	KamataEngine::Vector2 GetPosition() { return { worldTransform_.translation_.x,worldTransform_.translation_.y }; }
 private:
 	//
 	uint32_t texture_;

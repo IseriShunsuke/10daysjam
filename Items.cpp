@@ -39,6 +39,7 @@ void Items::Update()
 	itemsPosition_.x -= itemsSpeed_;
 	if (itemsPosition_.x < -100.0f)
 	{
+
 		itemsPosition_.x = 1280.0f;
 		itemsPosition_.y = float(rand() % (720 - 64));
 		// 種類をランダム変更

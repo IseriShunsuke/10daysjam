@@ -50,7 +50,8 @@ void GameScene::Initialize()
 
 	items_ = new Items();
 	items_->Initialize();
-
+	
+	isHit = false;
 }
 
 // 更新
@@ -72,7 +73,7 @@ void GameScene::Update()
 		drawNumber_->Update(gameScore_);//
 
 		items_->Update();
-
+		AllCollision();
 	}
 	else
 	{
@@ -82,6 +83,18 @@ void GameScene::Update()
 		isTitle = result_->GetTitle();
 	}
 
+}
+
+void GameScene::AllCollision()
+{
+	isHit = IsCollisionBox(player_->GetPosition(), items_->GetPosition());
+
+	if (isHit)
+	{
+
+
+		hp_ += 10;
+	}
 }
 
 // 描画

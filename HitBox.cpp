@@ -1,12 +1,12 @@
 #include "HitBox.h"
 using namespace KamataEngine;
 
-bool IsCollision(const KamataEngine::WorldTransform& player, const KamataEngine::WorldTransform& box)
+bool IsCollisionBox(const KamataEngine::Vector2& player, const KamataEngine::Vector2& box)
 {
 
-	if (player.translation_.x + kWidth > box.translation_.x && player.translation_.x  < box.translation_.x + kWidth)
+	if (player.x + kWidth / 2 > box.x - kWidth / 2 && player.x  - kWidth / 2 < box.x + kWidth / 2)
 	{
-		if (player.translation_.y + kWidth > box.translation_.y && player.translation_.y < box.translation_.y + kWidth)
+		if (player.y + kHeight / 2 > box.y - kHeight / 2 && player.y  - kHeight / 2 < box.y + kHeight / 2)
 		{
 			return true;
 		}

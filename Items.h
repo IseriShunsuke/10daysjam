@@ -20,7 +20,7 @@ public:
 	/// </summary>
 	void Draw();
 
-
+	KamataEngine::Vector2 GetPosition() { return itemsPosition_; }
 private:
 
 	// アイテム種類
