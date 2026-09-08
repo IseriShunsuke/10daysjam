@@ -27,16 +27,16 @@ void Player::Update()
 {
 	// 移動入力
 	if (Input::GetInstance()->PushKey(DIK_D)) {
-		worldTransform_.translation_.x += 3.0f;
+		worldTransform_.translation_.x += playerSpeed_;
 	}
 	if (Input::GetInstance()->PushKey(DIK_A)) {
-		worldTransform_.translation_.x -= 3.0f;
+		worldTransform_.translation_.x -= playerSpeed_;
 	}
 	if (Input::GetInstance()->PushKey(DIK_W)) {
-		worldTransform_.translation_.y -= 3.0f;
+		worldTransform_.translation_.y -= playerSpeed_;
 	}
 	if (Input::GetInstance()->PushKey(DIK_S)) {
-		worldTransform_.translation_.y += 3.0f;
+		worldTransform_.translation_.y += playerSpeed_;
 	}
 
 

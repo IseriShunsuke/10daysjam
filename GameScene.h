@@ -71,6 +71,10 @@ private:
 
 	bool isHit;
 
+	bool isJetEngineActive_ = false;
+	int jetEngineTimer_ = 0;
+	static const int kJetEngineTime = 60 * 5;
+
 	//アイテム↑
 
 	// 敵

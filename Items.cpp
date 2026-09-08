@@ -31,30 +31,22 @@ void Items::Initialize()
 		itemsSprite_->SetAnchorPoint({ 0.5f, 0.5f });
 	}
 
+	ItemsRespawn();
 }
 
 void Items::Update()
 {
 	
+	if (!isItemsActive_)
+	{
+		return;
+	}
+
 	itemsPosition_.x -= itemsSpeed_;
+
 	if (itemsPosition_.x < -100.0f)
 	{
-
-		itemsPosition_.x = 1280.0f;
-		itemsPosition_.y = float(rand() % (720 - 64));
-		// 種類をランダム変更
-		itemsType_ = (ItemsType)(rand() % 3);
-
-		// 画像切り替え
-		delete itemsSprite_;
-
-		itemsSprite_ =
-			Sprite::Create
-			(
-				itemsTextureHandle_[itemsType_],
-				itemsPosition_
-			);
-		itemsSprite_->SetAnchorPoint({ 0.5f, 0.5f });
+		ItemsRespawn();
 	}
 
 	if (itemsSprite_)
@@ -66,10 +58,41 @@ void Items::Update()
 
 void Items::Draw()
 {
+	if (!isItemsActive_)
+	{
+		return;
+	}
 
 	if (itemsSprite_)
 	{
 		itemsSprite_->Draw();
 	}
 
+}
+
+void Items::ItemsRespawn()
+{
+	// 再出現有効
+	isItemsActive_ = true;
+
+	// 右端から出現
+	itemsPosition_.x = 1280.0f;
+
+	// Y座標ランダム
+	itemsPosition_.y = float(rand() % (720 - 64));
+
+	// アイテム種類ランダム
+	itemsType_ = (ItemsType)(rand() % 3);
+
+	// 画像切り替え
+	delete itemsSprite_;
+
+	itemsSprite_ = Sprite::Create(
+		itemsTextureHandle_[itemsType_],
+		itemsPosition_);
+
+	if (itemsSprite_)
+	{
+		itemsSprite_->SetAnchorPoint({ 0.5f, 0.5f });
+	}
 }

@@ -101,6 +101,20 @@ void GameScene::Update()
 
 			enemies_[i]->Update(playerPosition);
 		}
+
+		if (isJetEngineActive_)
+		{
+			jetEngineTimer_--;
+
+			if (jetEngineTimer_ <= 0)
+			{
+				isJetEngineActive_ = false;
+
+				player_->SetPlayerSpeed(
+					player_->GetPlayerSpeed() - 2.0f);
+			}
+		}
+
 	}
 	else
 	{
@@ -114,13 +128,41 @@ void GameScene::Update()
 
 void GameScene::AllCollision()
 {
+	//if (!items_->GetIsActive())
+	//{
+	//	return;
+	//}
+
 	isHit = IsCollisionBox(player_->GetPosition(), items_->GetPosition());
 
 	if (isHit)
 	{
 
+		switch (items_->GetItemsType())
+		{
+		case Items::kItemsTunakan:
+			hp_ += 10;
+			break;
 
-		hp_ += 10;
+		case Items::kItemsJetEngine:
+
+			if (!isJetEngineActive_)
+			{
+				isJetEngineActive_ = true;
+				jetEngineTimer_ = kJetEngineTime;
+
+				player_->SetPlayerSpeed(
+					player_->GetPlayerSpeed() + 2.0f);
+			}
+			break;
+
+		case Items::kItemsTorpedo:
+			// びょうどうの処理
+			// びょうどうの処理
+			// びょうどうの処理
+			break;
+		}
+		items_->ReItemsRespawn();
 	}
 }
 
