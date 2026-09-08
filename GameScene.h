@@ -37,7 +37,7 @@ public:
 	bool GetRetry() { return isRetry; }
 	bool GetTitle() { return isTitle; }
 private:
-	KamataEngine::Model* model_ = nullptr;
+	KamataEngine::Sprite* spritePlayer_;
 	Player* player_;
 	Stage* stage_;
 	DrawNumber* drawNumber_;
@@ -45,6 +45,7 @@ private:
 	uint32_t backGraundTextureHandle_;
 	uint32_t fontTextureHandle_;
 	uint32_t textureHandleNumber_;
+	uint32_t textureHandlePlayer_;
 	KamataEngine::Sprite* spriteFont_ = nullptr;
 
 	int gameScore_;
