@@ -6,6 +6,7 @@
 #include "Result.h"
 #include "Stage.h"
 #include "DrawNumber.h"
+#include "Enemy.h"
 
 #include"Items.h"
 
@@ -72,5 +73,9 @@ private:
 
 	//アイテム↑
 
+	// 敵
+	static const int kEnemyCount = 2;
+	Enemy* enemies_[kEnemyCount] = {};
+	uint32_t enemyTextureHandle_;
 };
 
