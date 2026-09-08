@@ -12,6 +12,7 @@ GameScene::~GameScene()
 	delete drawNumber_;
 
 	delete model_;
+	delete items_;
 }
 
 // 初期化
@@ -31,7 +32,7 @@ void GameScene::Initialize()
 	stage_ = new Stage();
 	stage_->Initialize(backGraundTextureHandle_);
 
-	hp_ = 200;
+	hp_ = 2000;
 
 	drawNumber_ = new DrawNumber();
 	drawNumber_->Initialize(textureHandleNumber_);
@@ -43,6 +44,13 @@ void GameScene::Initialize()
 
 	result_ = new Result();
 	result_->Initialize();
+
+	itemsTextureHandle_ =
+		TextureManager::Load("Items/Tunakan.png");
+
+	items_ = new Items();
+	items_->Initialize();
+
 }
 
 // 更新
@@ -63,6 +71,9 @@ void GameScene::Update()
 		player_->Update();				//
 		stage_->Update();				//再利用
 		drawNumber_->Update(gameScore_);//
+
+		items_->Update();
+
 	}
 	else
 	{
@@ -71,6 +82,7 @@ void GameScene::Update()
 		isRetry = result_->GetRetry();
 		isTitle = result_->GetTitle();
 	}
+
 }
 
 // 描画
@@ -98,6 +110,8 @@ void GameScene::Draw()
 	{
 		result_->Draw();
 	}
+
+	items_->Draw();
 
 	Sprite::PostDraw();
 }

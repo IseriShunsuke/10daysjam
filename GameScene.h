@@ -7,6 +7,8 @@
 #include "Stage.h"
 #include "DrawNumber.h"
 
+#include"Items.h"
+
 // ゲームシーン
 class GameScene
 {
@@ -57,5 +59,13 @@ private:
 	bool isDead;
 
 	Result* result_;
+
+	//アイテム↓
+
+	Items* items_ = nullptr;
+	uint32_t itemsTextureHandle_;
+
+	//アイテム↑
+
 };
 
