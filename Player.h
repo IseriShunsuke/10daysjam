@@ -19,6 +19,9 @@ public:
 
 	KamataEngine::Vector2 GetPosition() { return { worldTransform_.translation_.x,worldTransform_.translation_.y }; }
 
+	float GetPlayerSpeed() const { return playerSpeed_; }
+	void SetPlayerSpeed(float playerSpeed) { playerSpeed_ = playerSpeed; }
+
 private:
 	//
 	uint32_t texture_;
@@ -28,5 +31,7 @@ private:
 	KamataEngine::WorldTransform worldTransform_;
 	// テクスチャー
 	uint32_t textureHandle_;
+
+	float playerSpeed_ = 5.0f;
 };
 

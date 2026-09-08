@@ -5,6 +5,14 @@ class Items
 {
 public:
 
+	// アイテム種類
+	enum ItemsType
+	{
+		kItemsTunakan,
+		kItemsJetEngine,
+		kItemsTorpedo,
+	};
+
 	/// <summary>
 	/// 初期化
 	/// </summary>
@@ -21,15 +29,18 @@ public:
 	void Draw();
 
 	KamataEngine::Vector2 GetPosition() { return itemsPosition_; }
-private:
-
-	// アイテム種類
-	enum ItemsType
+	bool GetIsActive() const { return isItemsActive_; }
+	void SetIsActive(bool itemsActive) { isItemsActive_ = itemsActive; }
+	// アイテム種類取得
+	ItemsType GetItemsType()
 	{
-		kItemsTunakan,
-		kItemsJetEngine,
-		kItemsTorpedo,
-	};
+		return itemsType_;
+	}
+	void ReItemsRespawn()
+	{
+		ItemsRespawn();
+	}
+private:
 	ItemsType itemsType_;
 
 	// スプライト
@@ -42,5 +53,6 @@ private:
 	KamataEngine::Vector2 itemsPosition_ = {};
 
 	float itemsSpeed_ = 5.0f;
-
+	bool isItemsActive_ = true;
+	void ItemsRespawn();
 };
