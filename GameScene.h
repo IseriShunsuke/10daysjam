@@ -34,6 +34,8 @@ public:
 	/// </summary>
 	void Draw();
 
+	void AllCollision();
+
 
 	bool GetRetry() { return isRetry; }
 	bool GetTitle() { return isTitle; }
@@ -66,6 +68,8 @@ private:
 
 	Items* items_ = nullptr;
 	uint32_t itemsTextureHandle_;
+
+	bool isHit;
 
 	//アイテム↑
 

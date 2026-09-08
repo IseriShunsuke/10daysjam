@@ -56,6 +56,9 @@ void GameScene::Initialize()
 	items_ = new Items();
 	items_->Initialize();
 
+	
+	isHit = false;
+
 	// 敵テクスチャ読み込み
 	enemyTextureHandle_ = TextureManager::Load("Items/Tunakan.png");
 
@@ -86,6 +89,7 @@ void GameScene::Update()
 		drawNumber_->Update(gameScore_);//
 
 		items_->Update();
+		AllCollision();
 
 		// 敵更新
 		for (int i = 0; i < kEnemyCount; i++)
@@ -106,6 +110,18 @@ void GameScene::Update()
 		isTitle = result_->GetTitle();
 	}
 
+}
+
+void GameScene::AllCollision()
+{
+	isHit = IsCollisionBox(player_->GetPosition(), items_->GetPosition());
+
+	if (isHit)
+	{
+
+
+		hp_ += 10;
+	}
 }
 
 // 描画

@@ -26,16 +26,16 @@ void Player::Initialize(uint32_t texture)
 void Player::Update()
 {
 	// 移動入力
-	if (Input::GetInstance()->PushKey(DIK_RIGHT)) {
+	if (Input::GetInstance()->PushKey(DIK_D)) {
 		worldTransform_.translation_.x += 3.0f;
 	}
-	if (Input::GetInstance()->PushKey(DIK_LEFT)) {
+	if (Input::GetInstance()->PushKey(DIK_A)) {
 		worldTransform_.translation_.x -= 3.0f;
 	}
-	if (Input::GetInstance()->PushKey(DIK_UP)) {
+	if (Input::GetInstance()->PushKey(DIK_W)) {
 		worldTransform_.translation_.y -= 3.0f;
 	}
-	if (Input::GetInstance()->PushKey(DIK_DOWN)) {
+	if (Input::GetInstance()->PushKey(DIK_S)) {
 		worldTransform_.translation_.y += 3.0f;
 	}
 
