@@ -2,6 +2,11 @@
 
 using namespace KamataEngine;
 
+Player::~Player()
+{
+	delete sprite_;
+}
+
 // 初期化
 void Player::Initialize(uint32_t texture)
 {
