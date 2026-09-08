@@ -87,5 +87,11 @@ private:
 	static const int kBearCount = 2;
 	Bear* bears_[kBearCount] = {};
 	uint32_t bearTextureHandle_;
+
+	// 魚雷の敵停止タイマー
+	float enemyStopTimer_ = 0.0f;
+
+	// 敵の出現停止中
+	bool isEnemyStop_ = false;
 };
 

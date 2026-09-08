@@ -52,10 +52,17 @@ void Bear::Update(Vector2 playerPosition)
 	// 画面下に消えたら再出現
 	if (position_.y > 820.0f)
 	{
-		position_.x = 1280.0f;
-		position_.y = 50.0f;
+		// 出現停止中なら再出現しない
+		if (isSpawnStopped_)
+		{
+			isActive_ = false;
+		} else
+		{
+			position_.x = 1280.0f;
+			position_.y = 50.0f;
 
-		isFalling_ = false;
+			isFalling_ = false;
+		}
 	}
 
 	// スプライト位置更新
@@ -71,4 +78,30 @@ void Bear::Draw()
 	{
 		sprite_->Draw();
 	}
+}
+
+void Bear::StopSpawn()
+{
+	isSpawnStopped_ = true;
+}
+
+bool Bear::IsActive() const
+{
+	return isActive_;
+}
+
+bool Bear::IsSpawnStopped() const
+{
+	return isSpawnStopped_;
+}
+
+void Bear::RestartSpawn()
+{
+	isSpawnStopped_ = false;
+	isActive_ = true;
+
+	position_.x = 1280.0f;
+	position_.y = 50.0f;
+
+	isFalling_ = false;
 }

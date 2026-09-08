@@ -16,6 +16,14 @@ public:
 	// 描画
 	void Draw();
 
+	void StopSpawn();
+
+	void RestartSpawn();   // ←ここ
+
+	bool IsActive() const;
+
+	bool IsSpawnStopped() const;
+
 private:
 
 	// スプライト
@@ -38,4 +46,7 @@ private:
 
 	// 落下中か
 	bool isFalling_ = false;
+
+	bool isActive_ = true;
+	bool isSpawnStopped_ = false;
 };
