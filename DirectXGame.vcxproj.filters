@@ -51,8 +51,13 @@
     <ClCompile Include="Result.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+
+    <ClCompile Include="Items.cpp">
+      <Filter>ヘッダー ファイル</Filter>
+
     <ClCompile Include="HitBox.cpp">
       <Filter>ソース ファイル</Filter>
+
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -86,8 +91,13 @@
     <ClInclude Include="Result.h">
       <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
+
+    <ClInclude Include="Items.h">
+      <Filter>ソース ファイル</Filter>
+
     <ClInclude Include="HitBox.h">
       <Filter>ヘッダー ファイル</Filter>
+
     </ClInclude>
   </ItemGroup>
 </Project>
