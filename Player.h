@@ -16,7 +16,8 @@ public:
 	// 描画
 	void Draw();
 
-
+	// プレイヤー座標取得
+	KamataEngine::Vector2 GetPosition();
 private:
 	//
 	uint32_t texture_;

@@ -13,6 +13,11 @@ GameScene::~GameScene()
 	delete drawNumber_;
 
 	delete items_;
+
+	for (int i = 0; i < kEnemyCount; i++)
+	{
+		delete enemies_[i];
+	}
 }
 
 // 初期化
@@ -51,6 +56,15 @@ void GameScene::Initialize()
 	items_ = new Items();
 	items_->Initialize();
 
+	// 敵テクスチャ読み込み
+	enemyTextureHandle_ = TextureManager::Load("Items/Tunakan.png");
+
+	// 敵生成
+	for (int i = 0; i < kEnemyCount; i++)
+	{
+		enemies_[i] = new Enemy();
+		enemies_[i]->Initialize(enemyTextureHandle_);
+	}
 }
 
 // 更新
@@ -73,6 +87,16 @@ void GameScene::Update()
 
 		items_->Update();
 
+		// 敵更新
+		for (int i = 0; i < kEnemyCount; i++)
+		{
+			Vector2 playerPosition = {
+				player_->GetPosition().x,
+				player_->GetPosition().y
+			};
+
+			enemies_[i]->Update(playerPosition);
+		}
 	}
 	else
 	{
@@ -113,6 +137,12 @@ void GameScene::Draw()
 	}
 
 	items_->Draw();
+
+	// 敵描画
+	for (int i = 0; i < kEnemyCount; i++)
+	{
+		enemies_[i]->Draw();
+	}
 
 	Sprite::PostDraw();
 }
