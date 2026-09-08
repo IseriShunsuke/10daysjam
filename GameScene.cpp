@@ -18,6 +18,11 @@ GameScene::~GameScene()
 	{
 		delete enemies_[i];
 	}
+
+	for (int i = 0; i < kBearCount; i++)
+	{
+		delete bears_[i];
+	}
 }
 
 // 初期化
@@ -30,6 +35,8 @@ void GameScene::Initialize()
 	backGraundTextureHandle_ = TextureManager::Load("stage.png");
 	textureHandleNumber_ = TextureManager::Load("number.png");
 	textureHandlePlayer_ = TextureManager::Load("player/player1.png");
+	// クマ
+	bearTextureHandle_ = TextureManager::Load("player/player1.png");
 
 	player_ = new Player();
 	player_->Initialize(textureHandlePlayer_);
@@ -56,7 +63,7 @@ void GameScene::Initialize()
 	items_ = new Items();
 	items_->Initialize();
 
-	
+
 	isHit = false;
 
 	// 敵テクスチャ読み込み
@@ -67,6 +74,12 @@ void GameScene::Initialize()
 	{
 		enemies_[i] = new Enemy();
 		enemies_[i]->Initialize(enemyTextureHandle_);
+	}
+
+	for (int i = 0; i < kBearCount; i++)
+	{
+		bears_[i] = new Bear();
+		bears_[i]->Initialize(bearTextureHandle_);
 	}
 }
 
@@ -102,6 +115,17 @@ void GameScene::Update()
 			enemies_[i]->Update(playerPosition);
 		}
 
+		// クマ
+		Vector2 playerPosition = {
+	    player_->GetPosition().x,
+	    player_->GetPosition().y
+		};
+
+		for (int i = 0; i < kBearCount; i++)
+		{
+			bears_[i]->Update(playerPosition);
+		}
+
 		if (isJetEngineActive_)
 		{
 			jetEngineTimer_--;
@@ -115,8 +139,7 @@ void GameScene::Update()
 			}
 		}
 
-	}
-	else
+	} else
 	{
 		result_->Update();
 
@@ -167,7 +190,7 @@ void GameScene::AllCollision()
 }
 
 // 描画
-void GameScene::Draw() 
+void GameScene::Draw()
 {
 	DirectXCommon* dxcommon = DirectXCommon::GetInstance();
 
@@ -179,7 +202,7 @@ void GameScene::Draw()
 
 	Model::PreDraw();
 
-	
+
 
 	Model::PostDraw();
 
@@ -200,6 +223,12 @@ void GameScene::Draw()
 	for (int i = 0; i < kEnemyCount; i++)
 	{
 		enemies_[i]->Draw();
+	}
+
+	// クマ
+	for (int i = 0; i < kBearCount; i++)
+	{
+		bears_[i]->Draw();
 	}
 
 	Sprite::PostDraw();

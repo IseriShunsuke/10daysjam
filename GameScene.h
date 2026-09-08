@@ -7,6 +7,7 @@
 #include "Stage.h"
 #include "DrawNumber.h"
 #include "Enemy.h"
+#include "Bear.h"
 
 #include"Items.h"
 
@@ -81,5 +82,10 @@ private:
 	static const int kEnemyCount = 2;
 	Enemy* enemies_[kEnemyCount] = {};
 	uint32_t enemyTextureHandle_;
+
+	// クマ
+	static const int kBearCount = 2;
+	Bear* bears_[kBearCount] = {};
+	uint32_t bearTextureHandle_;
 };
 
