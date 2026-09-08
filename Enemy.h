@@ -13,6 +13,17 @@ public:
 
 	void Draw();
 
+	// 出現停止を開始
+	void StopSpawn();
+
+	void RestartSpawn();   // ←ここ
+
+	// 敵が画面内にいるか
+	bool IsActive() const;
+
+	// 出現停止中か
+	bool IsSpawnStopped() const;
+
 private:
 
 	KamataEngine::Sprite* sprite_ = nullptr;
@@ -30,4 +41,7 @@ private:
 
 	// 一度だけ方向を決める
 	bool directionDecided_ = false;
+
+	bool isActive_ = true;
+	bool isSpawnStopped_ = false;
 };

@@ -81,6 +81,9 @@ void GameScene::Initialize()
 		bears_[i] = new Bear();
 		bears_[i]->Initialize(bearTextureHandle_);
 	}
+
+	enemyStopTimer_ = 0.0f;
+	isEnemyStop_ = false;
 }
 
 // 更新
@@ -120,6 +123,29 @@ void GameScene::Update()
 	    player_->GetPosition().x,
 	    player_->GetPosition().y
 		};
+
+		if (isEnemyStop_)
+		{
+			enemyStopTimer_ -= 1.0f / 60.0f;
+
+			if (enemyStopTimer_ <= 0.0f)
+			{
+				enemyStopTimer_ = 0.0f;
+				isEnemyStop_ = false;
+
+				// サメを再出現可能にする
+				for (int i = 0; i < kEnemyCount; i++)
+				{
+					enemies_[i]->RestartSpawn();
+				}
+
+				// クマを再出現可能にする
+				for (int i = 0; i < kBearCount; i++)
+				{
+					bears_[i]->RestartSpawn();
+				}
+			}
+		}
 
 		for (int i = 0; i < kBearCount; i++)
 		{
@@ -180,9 +206,22 @@ void GameScene::AllCollision()
 			break;
 
 		case Items::kItemsTorpedo:
-			// びょうどうの処理
-			// びょうどうの処理
-			// びょうどうの処理
+			
+			isEnemyStop_ = true;
+			enemyStopTimer_ = 2.5f;
+
+			// サメ
+			for (int i = 0; i < kEnemyCount; i++)
+			{
+				enemies_[i]->StopSpawn();
+			}
+
+			// クマ
+			for (int i = 0; i < kBearCount; i++)
+			{
+				bears_[i]->StopSpawn();
+			}
+
 			break;
 		}
 		items_->ReItemsRespawn();

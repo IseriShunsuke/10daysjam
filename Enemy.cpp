@@ -60,12 +60,18 @@ void Enemy::Update(Vector2 playerPosition)
 		position_.y < -100.0f ||
 		position_.y > 820.0f)
 	{
-		// 右側のランダムな位置
-		position_.x = 1280.0f + float(rand() % 721);
-		position_.y = float(rand() % (720 - 64));
+		// 出現停止中なら再出現しない
+		if (isSpawnStopped_)
+		{
+			isActive_ = false;
+		} else
+		{
+			// 通常通り再出現
+			position_.x = 1280.0f + float(rand() % 721);
+			position_.y = float(rand() % (720 - 64));
 
-		// 次の出現時にPlayer方向を計算し直す
-		directionDecided_ = false;
+			directionDecided_ = false;
+		}
 	}
 
 	// スプライト位置更新
@@ -77,8 +83,37 @@ void Enemy::Update(Vector2 playerPosition)
 
 void Enemy::Draw()
 {
-	if (sprite_)
+	if (sprite_ && isActive_)
 	{
 		sprite_->Draw();
 	}
+}
+
+void Enemy::StopSpawn()
+{
+	isSpawnStopped_ = true;
+}
+
+bool Enemy::IsActive() const
+{
+	return isActive_;
+}
+
+bool Enemy::IsSpawnStopped() const
+{
+	return isSpawnStopped_;
+}
+
+void Enemy::RestartSpawn()
+{
+	isSpawnStopped_ = false;
+	isActive_ = true;
+
+	// 右側から再出現
+	position_.x = 1280.0f + float(rand() % 721);
+	position_.y = float(rand() % (720 - 64));
+
+	velocity_ = { -speed_, 0.0f };
+
+	directionDecided_ = false;
 }
