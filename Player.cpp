@@ -3,14 +3,18 @@
 using namespace KamataEngine;
 
 // 初期化
-void Player::Initialize(Model* model)
+void Player::Initialize(uint32_t texture)
 {
-	model_ = model;
+	size = { 64.0f, 64.0f };
+	texture_ = texture;
+
+	
 	worldTransform_.Initialize();
 	// 初期回転
-	worldTransform_.rotation_.y = std::numbers::pi_v<float> / 2.0f;
 	worldTransform_.translation_ = { -12.0f, -5.0f, 0 };
 	worldTransform_.scale_ = {5.0f, 5.0f, 5.0f};
+
+	sprite_ = Sprite::Create(textureHandle_, { worldTransform_.translation_.x, worldTransform_.translation_.y });
 }
 
 // 更新
@@ -49,10 +53,10 @@ void Player::Update()
 }
 
 // 描画
-void Player::Draw(Camera& camera)
+void Player::Draw()
 {
 
-	model_->Draw(worldTransform_, camera);
+	sprite_->Draw();
 }
 
 
