@@ -57,7 +57,7 @@ void GameScene::Initialize()
 	items_->Initialize();
 
 	// 敵テクスチャ読み込み
-	enemyTextureHandle_ = TextureManager::Load("Items/Tunakan.png");
+	enemyTextureHandle_ = TextureManager::Load("Items/KariEnemy.png");
 
 	// 敵生成
 	for (int i = 0; i < kEnemyCount; i++)
