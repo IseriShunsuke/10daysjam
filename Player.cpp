@@ -50,11 +50,3 @@ void Player::Draw()
 
 	sprite_->Draw();
 }
-
-Vector2 Player::GetPosition()
-{
-	return {
-		worldTransform_.translation_.x,
-		worldTransform_.translation_.y
-	};
-}
