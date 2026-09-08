@@ -1,4 +1,5 @@
 #include "GameScene.h"
+#include "HitBox.h"
 #include "Math.h"
 
 using namespace KamataEngine;
@@ -10,23 +11,21 @@ GameScene::~GameScene()
 	delete player_;
 	delete stage_;
 	delete drawNumber_;
-
-	delete model_;
 }
 
 // 初期化
 void GameScene::Initialize()
 {
+
 	// カメラの初期化
 	camera_.Initialize();
 
 	backGraundTextureHandle_ = TextureManager::Load("stage.png");
 	textureHandleNumber_ = TextureManager::Load("number.png");
-
-	model_ = Model::CreateFromOBJ("player");
+	textureHandlePlayer_ = TextureManager::Load("white1x1.png");
 
 	player_ = new Player();
-	player_->Initialize(model_);
+	player_->Initialize(textureHandlePlayer_);
 
 	stage_ = new Stage();
 	stage_->Initialize(backGraundTextureHandle_);
@@ -48,7 +47,6 @@ void GameScene::Initialize()
 // 更新
 void GameScene::Update()
 {
-
 	if (!isDead)//生きてたら
 	{
 		hp_--;
@@ -86,7 +84,7 @@ void GameScene::Draw()
 
 	Model::PreDraw();
 
-	player_->Draw(camera_);
+	player_->Draw();
 
 	Model::PostDraw();
 

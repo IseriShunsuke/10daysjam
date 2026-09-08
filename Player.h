@@ -6,18 +6,20 @@ class Player
 {
 public:
 	// 初期化
-	void Initialize(KamataEngine::Model* model);
+	void Initialize(uint32_t texture);
 
 	// 更新
 	void Update();
 
 	// 描画
-	void Draw(KamataEngine::Camera& camera);
+	void Draw();
 
 
 private:
-	// モデル
-	KamataEngine::Model* model_ = nullptr;
+	//
+	uint32_t texture_;
+	KamataEngine::Sprite* sprite_;
+	KamataEngine::Vector2 size;
 	// ワールド変換データ
 	KamataEngine::WorldTransform worldTransform_;
 	// テクスチャー
