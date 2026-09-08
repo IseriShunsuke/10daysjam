@@ -22,7 +22,7 @@ void GameScene::Initialize()
 
 	backGraundTextureHandle_ = TextureManager::Load("stage.png");
 	textureHandleNumber_ = TextureManager::Load("number.png");
-	textureHandlePlayer_ = TextureManager::Load("white1x1.png");
+	textureHandlePlayer_ = TextureManager::Load("player/player1.png");
 
 	player_ = new Player();
 	player_->Initialize(textureHandlePlayer_);
@@ -84,13 +84,15 @@ void GameScene::Draw()
 
 	Model::PreDraw();
 
-	player_->Draw();
+	
 
 	Model::PostDraw();
 
 	Sprite::PreDraw(dxcommon->GetCommandList());
 
 	drawNumber_->Draw();
+
+	player_->Draw();
 
 	if (isDead)//死んだら表示
 	{
