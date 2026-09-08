@@ -5,6 +5,8 @@
 class Player
 {
 public:
+	~Player();
+
 	// 初期化
 	void Initialize(uint32_t texture);
 
