@@ -12,8 +12,6 @@ GameScene::~GameScene()
 	delete stage_;
 	delete drawNumber_;
 
-
-	delete model_;
 	delete items_;
 }
 
