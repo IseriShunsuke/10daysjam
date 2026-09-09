@@ -87,7 +87,7 @@ void DrawScene() {
 
 // Windowsアプリでのエントリーポイント(main関数)
 int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
-	KamataEngine::Initialize(L"LE3D_03_イセリ_シュンスケ_確認04_04");
+	KamataEngine::Initialize(L"3063_ツナ具");
 
 	DirectXCommon* dxcommon = DirectXCommon::GetInstance();
 
