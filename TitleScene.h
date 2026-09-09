@@ -34,8 +34,15 @@ private:
 
 	Sprite* sprite_ = nullptr;
 
+	uint32_t tutorialTextureHandle_[5];
+
+	Sprite* spriteTutorial_ = nullptr;
+
+	int tutorialpage;
+
 	 // カメラ
 	 Camera camera_;
 
 	 bool isFinish;
+	 bool isView;
 };
