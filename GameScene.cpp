@@ -91,7 +91,7 @@ void GameScene::Initialize()
 	}
 
 	isMutekiTimer = false;
-	mutekiTimer = 3.0f;
+	mutekiTimer = 1.0f;
 
 	seDataHandle = Audio::GetInstance()->LoadWave("SE.wav");
 }
@@ -114,7 +114,7 @@ void GameScene::Update()
 
 			if (mutekiTimer <= 0.0f)
 			{
-				mutekiTimer = 3.0f;
+				mutekiTimer = 1.0f;
 				isMutekiTimer = false;
 			}
 		}
