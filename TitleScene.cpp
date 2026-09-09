@@ -48,10 +48,18 @@ void TitleScene::Update()
 		if (Input::GetInstance()->TriggerKey(DIK_D))
 		{
 			tutorialpage++;
+			if (tutorialpage >= 2)
+			{
+				tutorialpage = 2;
+			}
 		}
 		if (Input::GetInstance()->TriggerKey(DIK_A))
 		{
 			tutorialpage--;
+			if (tutorialpage <= 0)
+			{
+				tutorialpage = 0;
+			}
 		}
 		spriteTutorial_->SetTextureHandle(tutorialTextureHandle_[tutorialpage]);
 	}
