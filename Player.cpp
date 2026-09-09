@@ -42,6 +42,7 @@ void Player::Update()
 
 	worldTransform_.UpdateMatrix();
 	sprite_->SetPosition({ worldTransform_.translation_.x, worldTransform_.translation_.y });
+	sprite_->SetTextureHandle(texture_);
 }
 
 // 描画

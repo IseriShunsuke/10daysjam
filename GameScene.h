@@ -93,5 +93,9 @@ private:
 
 	// 敵の出現停止中
 	bool isEnemyStop_ = false;
+	bool isHitEnemy_[6];
+
+	float mutekiTimer;
+	bool isMutekiTimer;
 };
  
