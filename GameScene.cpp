@@ -92,6 +92,8 @@ void GameScene::Initialize()
 
 	isMutekiTimer = false;
 	mutekiTimer = 3.0f;
+
+	seDataHandle = Audio::GetInstance()->LoadWave("SE.wav");
 }
 
 // 更新
@@ -213,6 +215,57 @@ void GameScene::AllCollision()
 	for (int i = 0; i < kBearCount; i++)
 	{
 		isHitEnemy_[i + 3] = IsCollisionBox(player_->GetPosition(), bears_[i]->GetPosition());
+	}
+	if (isHitEnemy_[0] || isHitEnemy_[1] || isHitEnemy_[2])
+	{
+		if (!isMutekiTimer)
+		{
+			hp_ -= 10;
+
+			isMutekiTimer = true;
+
+			// サメに当たったときだけ音
+			Audio::GetInstance()->PlayWave(seDataHandle, false, 0.1f);
+		}
+
+		if (isHitEnemy_[0])
+		{
+			isHitEnemy_[0] = false;
+		}
+		if (isHitEnemy_[1])
+		{
+			isHitEnemy_[1] = false;
+		}
+		if (isHitEnemy_[2])
+		{
+			isHitEnemy_[2] = false;
+		}
+	}
+
+	if (isHitEnemy_[3] || isHitEnemy_[4] || isHitEnemy_[5])
+	{
+		if (!isMutekiTimer)
+		{
+			hp_ -= 10;
+
+			isMutekiTimer = true;
+
+			// クマに当たったときも音
+			Audio::GetInstance()->PlayWave(seDataHandle, false, 0.1f);
+		}
+
+		if (isHitEnemy_[3])
+		{
+			isHitEnemy_[3] = false;
+		}
+		if (isHitEnemy_[4])
+		{
+			isHitEnemy_[4] = false;
+		}
+		if (isHitEnemy_[5])
+		{
+			isHitEnemy_[5] = false;
+		}
 	}
 
 	if (isHit)

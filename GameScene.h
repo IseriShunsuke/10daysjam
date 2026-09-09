@@ -52,6 +52,8 @@ private:
 	uint32_t textureHandlePlayer_;
 	KamataEngine::Sprite* spriteFont_ = nullptr;
 
+	uint32_t seDataHandle;
+
 	int gameScore_;
 
 	int hp_;
