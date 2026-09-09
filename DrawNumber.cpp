@@ -11,6 +11,7 @@
  // 初期化
  void DrawNumber::Initialize(uint32_t textureHandle) {
 	 size = {32.0f, 64.0f};
+	 position_ = { 500.0f,5.0f };
 	 textureHandle_ = textureHandle;
 	 // スプライト
 	 for (int i = 0; i < 5; i++) {
@@ -44,6 +45,11 @@
 
  // 描画
  void DrawNumber::Draw() {
+	 // スプライト
+	 for (int i = 0; i < 5; i++) {
+		 sprite_[i]->SetPosition({ position_.x + size.x * i, position_.y });
+		 sprite_[i]->SetSize({ size.x,size.y });
+	 }
 	 for (int i = 0; i < 5; i++) {
 		 sprite_[i]->Draw();
 	 }

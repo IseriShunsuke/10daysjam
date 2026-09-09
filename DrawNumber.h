@@ -21,9 +21,15 @@ public:
 	/// </summary>
 	void Draw();
 
+	KamataEngine::Vector2 SetPosition(KamataEngine::Vector2 positon) { return position_ = positon; };
+
+	KamataEngine::Vector2 SetSize(KamataEngine::Vector2 size_) { return size = size_; };
+
 private:
 	KamataEngine::Sprite* sprite_[5] = {};
 	uint32_t textureHandle_;
 
 	KamataEngine::Vector2 size;
+
+	KamataEngine::Vector2 position_;
 };
