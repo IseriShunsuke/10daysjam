@@ -96,9 +96,9 @@ int WINAPI WinMain(_In_ HINSTANCE, _In_opt_ HINSTANCE, _In_ LPSTR, _In_ int) {
 
 	scene = Scene::KTITLE;
 
-	/*soundDataHandle = Audio::GetInstance()->LoadWave("darkmatter.wav");
+	soundDataHandle = Audio::GetInstance()->LoadWave("stage.wav");
 
-	voiceHandle = Audio::GetInstance()->PlayWave(soundDataHandle, true);*/
+	voiceHandle = Audio::GetInstance()->PlayWave(soundDataHandle, true);
 
 	while (true) {
 		if (KamataEngine::Update()) {

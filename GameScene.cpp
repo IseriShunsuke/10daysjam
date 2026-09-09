@@ -389,6 +389,9 @@ void GameScene::Draw()
 	if (isDead)//死んだら表示
 	{
 		result_->Draw();
+		drawNumber_->SetPosition({ 350.0f,300.0f });
+		drawNumber_->SetSize({ 32.0f * 4, 64.0f * 4 });
+		drawNumber_->Draw();
 	}
 
 	
