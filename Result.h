@@ -26,5 +26,10 @@ public:
 private:
 	bool isRetry;
 	bool isTitle;
+
+	float viewTimer;
+
+	uint32_t texture_;
+	KamataEngine::Sprite* sprite_;
 };
 

@@ -22,6 +22,8 @@ public:
 	float GetPlayerSpeed() const { return playerSpeed_; }
 	void SetPlayerSpeed(float playerSpeed) { playerSpeed_ = playerSpeed; }
 
+	uint32_t SetTexture(uint32_t texture) { return texture_ = texture; }
+
 private:
 	//
 	uint32_t texture_;

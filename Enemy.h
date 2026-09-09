@@ -24,6 +24,8 @@ public:
 	// 出現停止中か
 	bool IsSpawnStopped() const;
 
+	KamataEngine::Vector2 GetPosition() { return position_; }
+
 private:
 
 	KamataEngine::Sprite* sprite_ = nullptr;

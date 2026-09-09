@@ -36,7 +36,7 @@ void GameScene::Initialize()
 	textureHandleNumber_ = TextureManager::Load("number.png");
 	textureHandlePlayer_ = TextureManager::Load("player/player1.png");
 	// クマ
-	bearTextureHandle_ = TextureManager::Load("player/player1.png");
+	bearTextureHandle_ = TextureManager::Load("kuma.png");
 
 	player_ = new Player();
 	player_->Initialize(textureHandlePlayer_);
@@ -67,7 +67,7 @@ void GameScene::Initialize()
 	isHit = false;
 
 	// 敵テクスチャ読み込み
-	enemyTextureHandle_ = TextureManager::Load("Items/KariEnemy.png");
+	enemyTextureHandle_ = TextureManager::Load("same.png");
 
 	// 敵生成
 	for (int i = 0; i < kEnemyCount; i++)
@@ -84,6 +84,14 @@ void GameScene::Initialize()
 
 	enemyStopTimer_ = 0.0f;
 	isEnemyStop_ = false;
+
+	for (int i = 0; i < 6; i++)
+	{
+		isHitEnemy_[i] = {};
+	}
+
+	isMutekiTimer = false;
+	mutekiTimer = 3.0f;
 }
 
 // 更新
@@ -96,6 +104,17 @@ void GameScene::Update()
 		if (hp_ <= 0)
 		{
 			isDead = true;//死
+		}
+
+		if (isMutekiTimer)
+		{
+			mutekiTimer -= 1.0f / 60.0f;
+
+			if (mutekiTimer <= 0.0f)
+			{
+				mutekiTimer = 3.0f;
+				isMutekiTimer = false;
+			}
 		}
 
 		gameScore_++;//スコア
@@ -173,6 +192,7 @@ void GameScene::Update()
 		isTitle = result_->GetTitle();
 	}
 
+	
 }
 
 void GameScene::AllCollision()
@@ -184,13 +204,24 @@ void GameScene::AllCollision()
 
 	isHit = IsCollisionBox(player_->GetPosition(), items_->GetPosition());
 
+	// サメ
+	for (int i = 0; i < kEnemyCount; i++)
+	{
+		isHitEnemy_[i] = IsCollisionBox(player_->GetPosition(), enemies_[i]->GetPosition());
+	}
+	// クマ
+	for (int i = 0; i < kBearCount; i++)
+	{
+		isHitEnemy_[i + 3] = IsCollisionBox(player_->GetPosition(), bears_[i]->GetPosition());
+	}
+
 	if (isHit)
 	{
 
 		switch (items_->GetItemsType())
 		{
 		case Items::kItemsTunakan:
-			hp_ += 10;
+			hp_ += 200;
 			break;
 
 		case Items::kItemsJetEngine:
@@ -226,6 +257,54 @@ void GameScene::AllCollision()
 		}
 		items_->ReItemsRespawn();
 	}
+
+	if (isHitEnemy_[0] || isHitEnemy_[1] || isHitEnemy_[2])
+	{
+		if (!isMutekiTimer)
+		{
+			hp_ -= 10;
+
+			isMutekiTimer = true;
+		}
+
+		if (isHitEnemy_[0] )
+		{
+			isHitEnemy_[0] = false;
+		}
+		if (isHitEnemy_[1])
+		{
+			isHitEnemy_[1] = false;
+		}
+		if (isHitEnemy_[2])
+		{
+			isHitEnemy_[2] = false;
+		}
+
+	}
+
+	if (isHitEnemy_[3] || isHitEnemy_[4] || isHitEnemy_[5])
+	{
+		if (!isMutekiTimer)
+		{
+			hp_ -= 10;
+
+			isMutekiTimer = true;
+		}
+
+		if (isHitEnemy_[3])
+		{
+			isHitEnemy_[3] = false;
+		}
+		if (isHitEnemy_[4])
+		{
+			isHitEnemy_[4] = false;
+		}
+		if (isHitEnemy_[5])
+		{
+			isHitEnemy_[5] = false;
+		}
+
+	}
 }
 
 // 描画
@@ -249,14 +328,49 @@ void GameScene::Draw()
 
 	drawNumber_->Draw();
 
-	player_->Draw();
 
-	if (isDead)//死んだら表示
+	if (hp_ / 250 >= 7.0f)
 	{
-		result_->Draw();
+		textureHandlePlayer_ = TextureManager::Load("player/player1.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ / 250 < 7.0f && hp_ / 250 >= 6.0f )
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player2.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ / 250 < 6.0f && hp_ / 250 >= 5.0f)
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player3.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ / 250 < 5.0f && hp_ / 250 >= 4.0f)
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player4.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ / 250 < 4.0f && hp_ / 250 >= 3.0f)
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player5.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ / 250 < 3.0f && hp_ / 250 >= 2.0f)
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player6.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ / 250 < 2.0f && hp_  >= 0.1f)
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player7.png");
+		player_->SetTexture(textureHandlePlayer_);
+	}
+	if (hp_ == 0.0f)
+	{
+		textureHandlePlayer_ = TextureManager::Load("player/player8.png");
+		player_->SetTexture(textureHandlePlayer_);
 	}
 
-	items_->Draw();
+	player_->Draw();
 
 	// 敵描画
 	for (int i = 0; i < kEnemyCount; i++)
@@ -269,6 +383,17 @@ void GameScene::Draw()
 	{
 		bears_[i]->Draw();
 	}
+
+	items_->Draw();
+
+	if (isDead)//死んだら表示
+	{
+		result_->Draw();
+	}
+
+	
+
+	
 
 	Sprite::PostDraw();
 }

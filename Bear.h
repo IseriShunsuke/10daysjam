@@ -24,6 +24,8 @@ public:
 
 	bool IsSpawnStopped() const;
 
+
+	KamataEngine::Vector2 GetPosition() { return position_; }
 private:
 
 	// スプライト
